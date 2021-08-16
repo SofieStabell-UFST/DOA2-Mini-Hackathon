@@ -1,9 +1,7 @@
 node_modules/
-public/js
+public/scripts
 
 /target
-/checkouts
-/src/gen
 
 pom.xml
 pom.xml.asc
@@ -14,7 +12,3 @@ pom.xml.asc
 .idea
 .lein-*
 .nrepl-*
-.DS_Store
-
-.hgignore
-.hg/
