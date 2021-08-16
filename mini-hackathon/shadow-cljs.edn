@@ -1,4 +1,4 @@
-{:source-paths ["src/main"]
+{:source-paths ["src/daemning"]
  :dev-http     {8081
                 {:root "public"
                  :proxy-url "http://localhost:3000"}}
