@@ -4,7 +4,6 @@
     [reagent.dom :as rdom]))
 
 (defn mini-app []
-
       [:div
        [:div.header [:header "Bevar Dæmmingerned "]
         [:p {:style {:color "white" :text-align :center}} "Mini Hackathon2 Demo v1.0.0"]]
