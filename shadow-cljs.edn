@@ -7,5 +7,5 @@
                 [cljs-http "0.1.46"]]
  :builds       {:app {:target     :browser
                       :output-dir "public/scripts/"
-                      :modules    {:core {:init-fn frontend.core/run}}
-                      :devtools   {:after-load frontend.core/reload}}}}
+                      :modules    {:core {:init-fn frontend/run}}
+                      :devtools   {:after-load frontend/reload}}}}
