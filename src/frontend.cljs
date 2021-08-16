@@ -1,7 +1,8 @@
 (ns frontend
   (:require
     [reagent.core :as r]
-    [reagent.dom :as rdom]))
+    [reagent.dom :as rdom]
+    [simulation :as sim]))
 
 (defn mini-app []
       [:div
@@ -39,6 +40,8 @@
           [:span [:strong "4 sek"]]]]
         [:span.rotate [:strong "Output= stk/time"]]
         ]
+       [sim/pause-btn]
+       [sim/time-display]
        [:footer [:strong "copyright@hold2DevOpsAcademy"]]]
       )
 
