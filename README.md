@@ -1,10 +1,13 @@
 #README
 
-##Hovrdan køre jeg doa2-mini-hackathon local?
+##Hvordan kører jeg doa2-mini-hackathon local?
 
 1. install Node Package Manager:
     `npm install`
-   (hvis du har allerede installeret npm, gå til stap 2)
-2. kør npx shaadow-sljs
+   (hvis du allerede har installeret npm, gå til skridt 2)
+2. kør npx shadow-sljs
     `npx shadow-cljs watch :app`
-3. 
+
+## Testing
+For at holde øje med kildekoden og automatisk køre tests ved ændringer, brug
+`npx shadow-cljs watch :test`
