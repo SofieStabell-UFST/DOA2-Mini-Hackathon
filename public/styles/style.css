@@ -1,94 +1,324 @@
-.grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-item: center;
+body {
+   font-family: Arial;
+   font-size: 16px;
+   line-height: 18px;
+   font-weight: bold;
+   display: block;
+   color: #FFF;
+   whitespace: no-wrap;
+   background: #F4F4F4
 }
 
-.grid > span {
+img {
+    display: block;
+    width: 1440px;
+    height: 1608;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    width: 1440px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.input {
+  position: absolute;
+  top: 245px;
+  left: 50px;
+  height: 29px;
+  width: 64px;
+  color: #14143C;
+  font-size: 26px;
+  line-height: 29px;
+}
+
+.skovhygge-input {
+    position: absolute;
+    top: 280px;
+    left: 50px;
+    height: 18px;
+    width: 53.62px;
+    color: #14143C;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: right;
+}
+
+.output {
+  position: absolute;
+  top: 150px;
+  right: 50px;
+  height: 29px;
+  width: 87px;
+  color: #14143C;
+  font-family: Arial;
+  font-size: 26px;
+  line-height: 29px;
+}
+
+.skov-output {
+  position: absolute;
+  top: 185px;
+  right: 80px;
+  height: 18px;
+  width: 72px;
+  color: #14143C;
+  font-family: Arial;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: right;
+}
+
+.total {
+    position: absolute;
+    top: 40px;
+    left: 700px;
+    height: 29px;
+    width: 61px;
+    color: #14143C;
+    font-size: 26px;
+    line-height: 29px;
+}
+
+.process-time-header {
+    position: absolute;
+    top: 90px;
+    left: 520px;
+    height: 29px;
+    width: 162px;
+    color: #14143C;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: left:
+}
+
+.lead-time-header {
+    position: absolute;
+    top: 90px;
+    left: 820px;
+    height: 29px;
+    width: 122px;
+    color: #14143C;
+    font-size: 26px;
+    line-height: 29px;
+}
+
+.total-process-time {
+   position: absolute;
+    top: 175px;
+    left: 520px;
+    height: 29px;
+    width: 79px;
+    color: #14143C;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: right;
+}
+
+.total-lead-time {
+    position: absolute;
+    top: 175px;
+    left: 820px;
+    height: 29px;
+    width: 79px;
+    color: #14143C;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: right;
+}
+
+.process-time-1 {
+    position: absolute;
+    top: 250px;
+    left: 170px;
+    height: 18px;
+    width: 110px;
+    color: #14143C;
+    font-size: 16px;
+    line-height: 18px;
     text-align: center;
 }
 
-.body {
-    height: 100px;
+.input-process-time-1 {
+    position: absolute;
+    top: 280px;
+    left: 170px;
+    height: 29px;
+    width: 50px;
+    color: #14143C;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: right;
 }
 
-.rt-border {
-    border-right: 40px solid grey;
+.label-ps-1 {
+      position: absolute;
+      top: 283px;
+      left: 230px;
+      height: 29px;
+      width: 51px;
+      color: #14143C;
+      font-size: 26px;
+      line-height: 29px;
+      text-align: center;
+    }
+
+.process-time-2 {
+    position: absolute;
+    top: 260px;
+    left: 450px;
+    height: 18px;
+    width: 110px;
+    color: #14143C;
+    font-family: Arial;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
 }
 
-.header {
-  padding: 40px;
-  background: #14143c;
-  text-shadow: 1px 1px grey;
-  }
-
- header {
-  color: white;
-  font-size: 30px;
-  text-align: center;
+.input-process-time-2 {
+    position: absolute;
+    top: 280px;
+    left: 450px;
+    height: 29px;
+    width: 50px;
+    color: #14143C;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: right;
 }
 
-.header-container {
-    display: flex;
-    justify-content: space-evenly;
-    padding-bottom: 5px;
-    margin: 3rem;
-    font-weight: bold;
-    font-size: 20px;
+.label-ps-2 {
+      position: absolute;
+      top: 283px;
+      left: 510px;
+      height: 29px;
+      width: 51px;
+      color: #14143C;
+      font-size: 26px;
+      line-height: 29px;
+      text-align: center;
+    }
 
+.process-time-3 {
+    position: absolute;
+    top: 260px;
+    left: 700px;
+    height: 18px;
+    width: 110px;
+    color: #14143C;
+    font-family: Arial;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
 }
 
-.body-container {
-    display:flex;
-    align-self: auto;
-    justify-content: space-evenly;
-    margin: 0 10rem;
+.input-process-time-3 {
+    position: absolute;
+    top: 280px;
+    left: 700px;
+    height: 29px;
+    width: 50px;
+    color: #14143C;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: right;
 }
 
-.grid-header {
-    padding-bottom: 10px;
-    border-bottom: 2px solid black;
-    justify-items: self-end;
+.label-ps-3 {
+      position: absolute;
+      top: 283px;
+      left: 760px;
+      height: 29px;
+      width: 51px;
+      color: #14143C;
+      font-size: 26px;
+      line-height: 29px;
+      text-align: center;
+    }
 
-}
-.input-text-header {
-    font-size: 20px;
-}
-
-.footer-text {
-    color: red;
-    border-top: 2px solid black;
-    padding-top: 10px;
-    justify-items: self-end;
-
-}
-
-.main {
-    width: 600px;
-}
-
-.input-text {
-     border: none;
-
+.process-time-4 {
+    position: absolute;
+    top: 260px;
+    left: 900px;
+    height: 18px;
+    width: 110px;
+    color: #14143C;
+    font-family: Arial;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
 }
 
-.red-color {
-    color : red;
+.input-process-time-4 {
+    position: absolute;
+    top: 280px;
+    left: 900px;
+    height: 29px;
+    width: 50px;
+    color: #14143C;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: right;
 }
 
-.rotate {
-    color: blue;
-    transform: rotate(-90deg);
-    align-self: center;
+.label-ps-4 {
+      position: absolute;
+      top: 283px;
+      left: 960px;
+      height: 29px;
+      width: 51px;
+      color: #14143C;
+      font-size: 26px;
+      line-height: 29px;
+      text-align: center;
+    }
+
+.process-time-5 {
+    position: absolute;
+    top: 100px;
+    right: 250px;
+    height: 18px;
+    width: 110px;
+    color: #14143C;
+    font-family: Arial;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
 }
 
-footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        padding-top: 10px;
-        height: 40px;
-        text-align: center;
-        background: #14143c;
-        color: #fff;
- }
+.input-process-time-5 {
+    position: absolute;
+    top: 120px;
+    right: 280px;
+    height: 29px;
+    width: 50px;
+    color: #14143C;
+    font-size: 26px;
+    line-height: 29px;
+    text-align: right;
+}
+
+.label-ps-5 {
+      position: absolute;
+      top: 120px;
+      right: 220px;
+      height: 29px;
+      width: 51px;
+      color: #14143C;
+      font-size: 26px;
+      line-height: 29px;
+      text-align: center;
+    }
+
+
+    .skov-process{
+
+    }
+
+    .skov-process-input {
+
+    }
