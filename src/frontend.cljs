@@ -27,8 +27,8 @@
           [:div [:input.input-text {:type "text" :placeholder "2" :maxlength "4" :size "1" :id "ws4"}] [:label "sek"]]
           [:div [:input.input-text {:type "text" :placeholder "4" :maxlength "4" :size "1" :id "ws5"}] [:label "sek"]]]
          [:div.grid.body
-          [:span.rt-border "1"]
-          [:span.rt-border "8"]
+          [:span.rt-border (count @sim/queue1)]
+          [:span.rt-border (count @sim/queue2)]
           [:span.rt-border "0"]
           [:span.rt-border "1"]
           [:span.rt-border "0"]]
