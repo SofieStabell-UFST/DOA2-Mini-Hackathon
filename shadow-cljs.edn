@@ -1,4 +1,4 @@
-{:source-paths ["src"]
+{:source-paths ["src" "test"]
  :dev-http     {8081 "public"}
  :nrepl        {:port 55555}
  :dependencies [[reagent "1.0.0-alpha2"]
@@ -6,4 +6,7 @@
  :builds       {:app {:target     :browser
                       :output-dir "public/scripts/"
                       :modules    {:core {:init-fn frontend/run}}
-                      :devtools   {:after-load frontend/reload}}}}
+                      :devtools   {:after-load frontend/reload}}
+                :test {:target :node-test
+                       :output-to "test.js"
+                       :autorun true}}}
