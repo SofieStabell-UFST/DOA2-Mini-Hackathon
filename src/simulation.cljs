@@ -31,17 +31,17 @@
   (swap! sim-time inc))
 
 (defn pause-btn []
-  [:input {:type     "button"
-           :value    (if @paused? "Start" "Pause")
-           :on-click #(do (if @paused?
-                            (reset! interval (js/setInterval run 1000))
-                            (do
-                              (js/clearInterval @interval)
-                              (process-time-inputs)))
-                          (swap! paused? not))}])
+  [:input.button.start-button {:type     "button"
+                               :value    (if @paused? "Start" "Pause")
+                               :on-click #(do (if @paused?
+                                                (reset! interval (js/setInterval run 1000))
+                                                (do
+                                                  (js/clearInterval @interval)
+                                                  (process-time-inputs)))
+                                              (swap! paused? not))}])
 
 (defn time-display []
-  [:div @sim-time])
+  [:div.timer @sim-time])
 
 (defn process-time-inputs []
       )
