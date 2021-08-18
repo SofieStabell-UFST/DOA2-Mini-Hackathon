@@ -59,24 +59,24 @@
         [:div.total-lead-time @total-lead-time " sek"]
 
         [:div.process-time.process-time-1 "Process time"]
-        [:div [:input.input-process-time.input-process-time-1 {:type      "number" :id "1" :placeholder @pt/process-time1 :max "2" :size "1" :read-only @sim/readonly
-                                                               :on-change #(pt/update-process-time (-> % .-target .-value) 1)}]
+        [:div [:input.input-process-time.input-process-time-1 {:type      "number" :id ":1" :placeholder @pt/process-time1 :max "2" :size "1" :read-only @sim/readonly
+                                                               :on-change #(pt/update-process-time1 (-> % .-target .-value))}]
          [:div.label-ps.label-ps-1 "sek"]]
         [:div.process-time.process-time-2 "Process time"]
-        [:div [:input.input-process-time.input-process-time-2 {:type      "number" :id "2" :placeholder @pt/process-time2 :max "2" :size "1" :read-only @sim/readonly
-                                                               :on-change #(pt/update-process-time (-> % .-target .-value) 2)}]
+        [:div [:input.input-process-time.input-process-time-2 {:type      "number" :id ":2" :placeholder @pt/process-time2 :max "2" :size "1" :read-only @sim/readonly
+                                                               :on-change #(pt/update-process-time1 (-> % .-target .-value))}]
          [:div.label-ps.label-ps-2 "sek"]]
         [:div.process-time.process-time-3 "Process time"]
-        [:div [:input.input-process-time.input-process-time-3 {:type      "number" :id "3" :placeholder @pt/process-time3 :max "2" :size "1" :read-only @sim/readonly
-                                                               :on-change #(pt/update-process-time (-> % .-target .-value) 3)}]
+        [:div [:input.input-process-time.input-process-time-3 {:type      "number" :id ":3" :placeholder @pt/process-time3 :max "2" :size "1" :read-only @sim/readonly
+                                                               :on-change #(pt/update-process-time1 (-> % .-target .-value))}]
          [:div.label-ps.label-ps-3 "sek"]]
         [:div.process-time.process-time-4 "Process time"]
-        [:div [:input.input-process-time.input-process-time-4 {:type      "number" :id "4" :placeholder @pt/process-time4 :max "2" :size "1" :read-only @sim/readonly
-                                                               :on-change #(pt/update-process-time (-> % .-target .-value) 4)}]
+        [:div [:input.input-process-time.input-process-time-4 {:type      "number" :id ":4" :placeholder @pt/process-time4 :max "2" :size "1" :read-only @sim/readonly
+                                                               :on-change #(pt/update-process-time1 (-> % .-target .-value))}]
          [:div.label-ps.label-ps-4 "sek"]]
         [:div.process-time.process-time-5 "Process time"]
-        [:div [:input.input-process-time.input-process-time-5 {:type      "number" :id "5" :placeholder @pt/process-time5 :max "2" :size "1" :read-only @sim/readonly
-                                                               :on-change #(pt/update-process-time (-> % .-target .-value) 5)}]
+        [:div [:input.input-process-time.input-process-time-5 {:type      "number" :id ":5" :placeholder @pt/process-time5 :max "2" :size "1" :read-only @sim/readonly
+                                                               :on-change #(pt/update-process-time1 (-> % .-target .-value))}]
          [:div.label-ps.label-ps-5 "sek"]]
 
         ;Diplays queue item

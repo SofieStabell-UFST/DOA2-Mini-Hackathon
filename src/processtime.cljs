@@ -8,8 +8,10 @@
 (defonce process-time4 (r/atom 0))
 (defonce process-time5 (r/atom 0))
 
-(defn name-utility [id] (str "process-time" id))
 
-(defn update-process-time [new-process-time id]
-      (reset! (name-utility id) new-process-time))
+
+(defn update-process-time1 [new-process-time]
+      (reset! process-time1 new-process-time))
+
+
 
