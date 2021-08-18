@@ -23,8 +23,7 @@
 (def queue-5 (r/atom 0))
 
 ;;Work station queue items
-(def ws1-queue (r/atom 0))
-(def ws2-queue (r/atom 0))
+
 (def ws3-queue (r/atom 0))
 (def ws4-queue (r/atom 0))
 (def ws5-queue (r/atom 0))
@@ -55,7 +54,7 @@
         [:div.output "Output"]
         [:div.skov-output @skov-output " stk"]
         [:div.skov-process "Process"]
-        [:div [:input.skov-process-input {:type "text" :placeholder @skov-process :maxlength "4" :size "1"}] [:div.label-skov-process "sek"]]
+        [:div [:input.skov-process-input {:type "number" :placeholder @skov-process :max "2" :size "1"}] [:div.label-skov-process "sek"]]
 
         [:div.total "Total"]
         [:div.process-time-header "Process time"]
@@ -64,30 +63,30 @@
         [:div.total-lead-time @total-lead-time " sek"]
 
         [:div.process-time.process-time-1 "Process time"]
-        [:div [:input.input-process-time.input-process-time-1 {:type "text" :placeholder @ps1-input :maxlength "4" :size "1"}]
+        [:div [:input.input-process-time.input-process-time-1 {:type "number" :placeholder @ps1-input :max "2" :size "1"}]
          [:div.label-ps.label-ps-1 "sek"]]
         [:div.process-time.process-time-2 "Process time"]
-        [:div [:input.input-process-time.input-process-time-2 {:type "text" :placeholder @ps2-input :maxlength "4" :size "1"}]
+        [:div [:input.input-process-time.input-process-time-2 {:type "number" :placeholder @ps2-input :max "2" :size "1"}]
          [:div.label-ps.label-ps-2 "sek"]]
         [:div.process-time.process-time-3 "Process time"]
-        [:div [:input.input-process-time.input-process-time-3 {:type "text" :placeholder @ps3-input :maxlength "4" :size "1"}]
+        [:div [:input.input-process-time.input-process-time-3 {:type "number" :placeholder @ps3-input :max "2" :size "1"}]
          [:div.label-ps.label-ps-3 "sek"]]
         [:div.process-time.process-time-4 "Process time"]
-        [:div [:input.input-process-time.input-process-time-4 {:type "text" :placeholder @ps4-input :maxlength "4" :size "1"}]
+        [:div [:input.input-process-time.input-process-time-4 {:type "number" :placeholder @ps4-input :max "2" :size "1"}]
          [:div.label-ps.label-ps-4 "sek"]]
         [:div.process-time.process-time-5 "Process time"]
-        [:div [:input.input-process-time.input-process-time-5 {:type "text" :placeholder @ps5-input :maitemxlength "4" :size "1"}] [:div.label-ps.label-ps-5 "sek"]]
+        [:div [:input.input-process-time.input-process-time-5 {:type "number" :placeholder @ps5-input :max "2" :size "1"}] [:div.label-ps.label-ps-5 "sek"]]
 
         ;Diplays queue item
-        [:div.ws-queue.ws1-queue @ws1-queue]
-        [:div.ws-queue.ws2-queue @ws2-queue]
+        [:div.ws-queue.ws1-queue (count @sim/queue1)]
+        [:div.ws-queue.ws2-queue (count @sim/queue2)]
         [:div.ws-queue.ws3-queue @ws3-queue]
         [:div.ws-queue.ws4-queue @ws4-queue]
         [:div.ws-queue.ws5-queue @ws5-queue]
 
         ;; Item that are ready to be handled
-        [:div.items.item-1 (count @sim/queue1)]
-        [:div.items.item-2 (count @sim/queue2)]
+        [:div.items.item-1 @item-1]
+        [:div.items.item-2 @item-2]
         [:div.items.item-3 @item-3]
         [:div.items.item-4 @item-4]
         [:div.items.item-5 @item-5]
@@ -109,14 +108,10 @@
         [:div.lead-time.lead-time-5 @lead-time-5 " sek"]
 
         ;;Start and Pause buttom
-        [:div.button.start-button @start-button]
+        [sim/pause-btn]
         [:div.button.reset-button @reset-button]
-        [:div.button.timer @timer]
+        [sim/time-display]
         ]
-
-       [sim/pause-btn]
-       [sim/time-display]
-
        ])
 
 (defn ^:export run []
