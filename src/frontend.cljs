@@ -120,3 +120,50 @@
 (defn ^:export reload []
       (.log js/console "reload...")
       (run))
+
+; clear-simulator will need to be refactored as we go as I predict changes, ie., new atoms and/or starting values.
+(defn clear-simulator []
+      ; from simulation.cljs
+      (reset! sim/paused? true)
+      (reset! sim/sim-time 0)
+      (reset! sim/interval nil)
+      (reset! sim/queue1 [])
+      (reset! sim/current-time1 0)
+      (reset! sim/current-log1 nil)
+      (reset! sim/queue2 [])
+
+      (reset! sim/process-time1 0)
+      (reset! sim/process-time2 0)
+      (reset! sim/process-time3 0)
+      (reset! sim/process-time4 0)
+      (reset! sim/process-time5 0)
+
+      ; from frontend.cljs
+      (reset! total-process-time 0)
+      (reset! total-lead-time 0)
+      (reset! skovhygge-input 0)
+      (reset! skov-output 0)
+      (reset! skov-process 0)
+
+      (reset! queue-1 0)
+      (reset! queue-2 0)
+      (reset! queue-3 0)
+      (reset! queue-4 0)
+      (reset! queue-5 0)
+
+      (reset! item-1 0)
+      (reset! item-2 0)
+      (reset! item-3 0)
+      (reset! item-4 0)
+      (reset! item-5 0)
+
+      (reset! start-button "Start")
+      (reset! timer "00:00")
+      (reset! reset-button "Ryd")
+
+      (reset! lead-time-1 "-")
+      (reset! lead-time-2 "-")
+      (reset! lead-time-3 "-")
+      (reset! lead-time-4 "-")
+      (reset! lead-time-5 "-")
+      )
