@@ -11,11 +11,17 @@
 (defonce current-log1 (r/atom nil))
 (defonce queue2 (r/atom []))
 
+(defonce process-time1 (r/atom 0))
+(defonce process-time2 (r/atom 0))
+(defonce process-time3 (r/atom 0))
+(defonce process-time4 (r/atom 0))
+(defonce process-time5 (r/atom 0))
+
 (defn run []
   (let [{:keys [from-queue to-queue current-time current-log]}
         (w/run {:from-queue   @queue1
                 :to-queue     @queue2
-                :process-time 8
+                :process-time @process-time1
                 :current-time @current-time1
                 :current-log  @current-log1})]
     (reset! current-time1 current-time)
@@ -29,9 +35,14 @@
            :value    (if @paused? "Start" "Pause")
            :on-click #(do (if @paused?
                             (reset! interval (js/setInterval run 1000))
-                            (js/clearInterval @interval))
+                            (do
+                              (js/clearInterval @interval)
+                              (process-time-inputs)))
                           (swap! paused? not))}])
 
 (defn time-display []
   [:div @sim-time])
+
+(defn process-time-inputs []
+      )
 
