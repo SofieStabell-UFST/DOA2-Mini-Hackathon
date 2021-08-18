@@ -18,8 +18,8 @@
         (update :to-queue conj current-log))
     state))
 
-(defn run [{:keys [process-time from-queue to-queue current-time current-log] :as state}]
-  (if (and current-log (< current-time process-time))
+(defn run [{:keys [processtime from-queue to-queue current-time current-log] :as state}]
+  (if (and current-log (< current-time processtime))
     (update state :current-time inc)
     (if current-log
       (let [{:keys [current-log] :as state} (push state)]
