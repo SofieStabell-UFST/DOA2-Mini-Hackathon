@@ -14,7 +14,6 @@
 (defonce readonly (r/atom false))
 
 
-
 (defn run []
       (let [{:keys [from-queue to-queue current-time current-log]}
             (w/run {:from-queue   @queue1
@@ -29,7 +28,7 @@
       (swap! sim-time inc))
 
 (defn pause-btn []
-      [:input {:type     "button"
+      [:input.button.start-button {:type     "button"
                :value    (if @paused? "Start" "Pause")
                :on-click #(do (if @paused?
                                 (do
@@ -42,7 +41,7 @@
                               (swap! paused? not))}])
 
 (defn time-display []
-      [:div @sim-time])
+      [:div.timer @sim-time])
 
 (defn process-time-inputs []
       )
