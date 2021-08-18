@@ -133,7 +133,7 @@ img {
 .process-time {
       position: absolute;
       height: 18px;
-      width: 110px;
+      width: 150px;
       color: #14143C;
       font-size: 16px;
       line-height: 18px;
@@ -352,6 +352,10 @@ img {
 
 .button {
   position: absolute;
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
   height: 29px;
   width: 142px;
   color: #14143C;
@@ -361,10 +365,18 @@ img {
   text-align: center;
 }
 
-.start-button {
-    top: 780px;
-    left: 461px;
 
+
+.button:hover,
+.button:focus {
+     -webkit-transform: scale(1.2);
+ }
+
+.start-button {
+    top: 758px;
+    left: 461px;
+    height: 87px;
+    width: 148px;
 }
 
 .reset-button {
@@ -373,6 +385,14 @@ img {
 }
 
 .timer {
+    position: absolute;
+    height: 29px;
+      width: 142px;
+      color: #14143C;
+      font-family: Arial;
+      font-size: 26px;
+      line-height: 29px;
+      text-align: center;
     top: 820px;
     left: 664px;
 }
@@ -453,4 +473,16 @@ img {
 
 .sim {
 color: #000;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
