@@ -49,3 +49,15 @@
                         :from-queue   [1 2]
                         :to-queue     [5]
                         :current-log  3}))))
+
+(deftest if-done-push-log-full-queue
+  (let [state {:current-time 8
+               :process-time 8
+               :from-queue [1 2 3]
+               :to-queue [1 2 3 4 5 6 7 8 9 10 11 12]
+               :current-log 49}]
+    (is (= (run state) {:current-time 8
+                        :process-time 8
+                        :from-queue [1 2 3]
+                        :to-queue [1 2 3 4 5 6 7 8 9 10 11 12]
+                        :current-log 49}))))
