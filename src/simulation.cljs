@@ -1,6 +1,8 @@
 (ns simulation
   (:require [reagent.core :as r]
-            [workstation :as w]))
+            [workstation :as w]
+            [skovhugger :refer [create-tree-trunk]]))
+;[skovhugger :refer [create-tree-trunk]]))
 
 (defonce paused? (r/atom true))
 (defonce sim-time (r/atom 0))
@@ -10,8 +12,13 @@
 (defonce current-time1 (r/atom 0))
 (defonce current-log1 (r/atom nil))
 (defonce queue2 (r/atom []))
+(def skovhugger-process-time 2)
 
 (defn run []
+  ;(.log js/console "run run:...")
+
+  ;; run skovhugger - push to queue1
+  (create-tree-trunk (empty? @queue1) skovhugger-process-time queue1)
   (let [{:keys [from-queue to-queue current-time current-log]}
         (w/run {:from-queue   @queue1
                 :to-queue     @queue2
