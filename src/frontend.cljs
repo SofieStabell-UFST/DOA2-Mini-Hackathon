@@ -1,7 +1,8 @@
 (ns frontend
   (:require
     [reagent.core :as r]
-    [reagent.dom :as rdom]))
+    [reagent.dom :as rdom]
+    [simulation :as sim]))
 
 (def total-process-time (r/atom 0))
 (def total-lead-time (r/atom 0))
@@ -77,8 +78,6 @@
         [:div.process-time.process-time-5 "Process time"]
         [:div [:input.input-process-time.input-process-time-5 {:type "text" :placeholder @ps5-input :maitemxlength "4" :size "1"}] [:div.label-ps.label-ps-5 "sek"]]
 
-        [:div.queue-item-5 @queue-5]
-
         ;Diplays queue item
         [:div.ws-queue.ws1-queue @ws1-queue]
         [:div.ws-queue.ws2-queue @ws2-queue]
@@ -87,8 +86,8 @@
         [:div.ws-queue.ws5-queue @ws5-queue]
 
         ;; Item that are ready to be handled
-        [:div.items.item-1 @item-1]
-        [:div.items.item-2 @item-2]
+        [:div.items.item-1 (count @sim/queue1)]
+        [:div.items.item-2 (count @sim/queue2)]
         [:div.items.item-3 @item-3]
         [:div.items.item-4 @item-4]
         [:div.items.item-5 @item-5]
@@ -113,8 +112,12 @@
         [:div.button.start-button @start-button]
         [:div.button.reset-button @reset-button]
         [:div.button.timer @timer]
+        ]
 
-        ]])
+       [sim/pause-btn]
+       [sim/time-display]
+
+       ])
 
 (defn ^:export run []
       (rdom/render [mini-app] (js/document.getElementById "app")))
