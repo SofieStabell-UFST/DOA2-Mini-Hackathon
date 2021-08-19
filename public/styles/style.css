@@ -391,9 +391,23 @@ input:focus, textarea:focus, select:focus{
     width: 148px;
 }
 
+.full{
+    color: red;
+}
+
+.warning {
+    color: orange;
+}
+
+.vacant {
+    color: green;
+}
+
 .reset-button {
-    top: 780px;
+    top: 750px;
     left: 859px;
+    height: 87px;
+    width: 148px;
 }
 
 .timer {
