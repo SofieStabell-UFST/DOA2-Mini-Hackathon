@@ -2,12 +2,12 @@
   (:require
     [reagent.core :as r]
     [simulation :as sim]
-    [processtime :as pt]
-    ))
+    [processtime :as pt]))
 
 ; clear-simulator will need to be refactored as we go as I predict changes, ie., new atoms and/or starting values.
 (defn clear-simulator []
-  (reset! sim/paused? true)
+  (sim/pause)
+
   (reset! sim/sim-time 0)
   (reset! sim/interval nil)
   (js/clearInterval @sim/interval)
