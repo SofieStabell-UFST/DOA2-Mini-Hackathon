@@ -85,7 +85,7 @@ img {
 
 .process-time-header {
     position: absolute;
-    top: 90px;
+    top: 80px;
     left: 520px;
     height: 29px;
     width: 162px;
@@ -97,7 +97,7 @@ img {
 
 .total-lead-time-header {
     position: absolute;
-    top: 90px;
+    top: 80px;
     left: 820px;
     height: 29px;
     width: 122px;
