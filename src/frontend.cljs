@@ -7,6 +7,15 @@
     [processtime :as pt]))
 
 
+(defn set-timer []
+      (let [date (js/Date. 0)]
+           (fn []
+               (.setSeconds date @sim/sim-time)
+               (-> date
+                   (.toISOString)
+                   (.substr 14 5)))
+           ))
+
 (defn mini-app []
       [:div.container
        [:div
