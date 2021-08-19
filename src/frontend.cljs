@@ -26,7 +26,7 @@
         [:div.skov-output @sim/skov-output " stk"]
         [:div.skov-process "Process"]
         [:div [:input.skov-process-input {:type "number"
-                                          :placeholder @sim/skov-process :max "2" :size "1"
+                                          :placeholder @pt/process-time-skovhugger-original :max "2" :size "1"
                                           :on-change #(pt/update-skovhugger-process-time (-> % .-target .-value))
                                           }] [:div.label-skov-process "sek"]
          ]
