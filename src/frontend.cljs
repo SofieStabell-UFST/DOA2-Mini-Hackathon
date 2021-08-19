@@ -105,11 +105,11 @@
                      (count @(sim/queues i))]))
 
         ;; Item that are ready to be handled
-        [:div.items.item-1 @sim/item-1]
-        [:div.items.item-2 @sim/item-2]
-        [:div.items.item-3 @sim/item-3]
-        [:div.items.item-4 @sim/item-4]
-        [:div.items.item-5 @sim/item-5]
+        [:div.items.item-1 (if (= @(sim/current-logs 0) nil) 0 1)]
+        [:div.items.item-2 (if (= @(sim/current-logs 1) nil) 0 1)]
+        [:div.items.item-3 (if (= @(sim/current-logs 2) nil) 0 1)]
+        [:div.items.item-4 (if (= @(sim/current-logs 3) nil) 0 1)]
+        ;;[:div.items.item-5 (if (= @(sim/current-logs 4) nil) 0 1)]
 
         ;;lead time
         [:div.lead-time-header.lead-time-header-1 "Lead time"]
