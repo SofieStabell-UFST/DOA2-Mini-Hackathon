@@ -10,7 +10,7 @@
 (reset! (queues 0) [1 2 3 4 5 6 7 8 9 10])
 (defonce current-times (vec (for [_ (range 4)] (r/atom 0))))
 (defonce current-logs (vec (for [_ (range 4)] (r/atom nil))))
-(defonce process-times (vec (for [_ (range 4)] (r/atom 2))))
+(defonce process-times (vec (for [_ (range 5)] (r/atom 2))))
 (reset! (process-times 1) 4)
 (reset! (process-times 2) 6)
 (defonce readonly (r/atom false))

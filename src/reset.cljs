@@ -11,7 +11,7 @@
   (reset! sim/interval nil)
   (js/clearInterval @sim/interval)
 
-  (doseq [i (range 4)]
+  (doseq [i (range 5)]
     (reset! (sim/process-times i) 10))
 
   (reset! sim/total-process-time 0)
