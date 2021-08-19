@@ -8,7 +8,6 @@
 (defonce sim-time (r/atom 0))
 (defonce interval (r/atom nil))
 (defonce queues (vec (for [_ (range 5)] (r/atom []))))
-(reset! (queues 0) [1 2 3 4 5 6 7 8 9 10])
 (defonce current-times (vec (for [_ (range 4)] (r/atom 0))))
 (defonce current-logs (vec (for [_ (range 4)] (r/atom nil))))
 (reset! (pt/process-times 1) 4)
@@ -19,7 +18,6 @@
 (defonce total-lead-time (r/atom 0))
 (defonce skovhygge-input (r/atom 0))
 (defonce skov-output (r/atom 0))
-(defonce skov-process (r/atom 0))
 
 ;; items that are ready to be send forward
 (defonce item-1 (r/atom 0))
@@ -35,6 +33,8 @@
 (defonce lead-time-4 (r/atom "-"))
 (defonce lead-time-5 (r/atom "-"))
 
+(defonce ws-ids ["ws1" "ws2" "ws3" "ws4"])
+
 (defn run []
   (swap! pt/process-time-skovhugger dec)
   (tree-felling (< (count @(first queues)) 12)
@@ -44,7 +44,8 @@
                 pt/process-time-skovhugger-original)
   (doseq [i (range 4)]
     (let [{:keys [from-queue to-queue current-time current-log]}
-          (w/run {:from-queue   @(queues i)
+          (w/run @sim-time (ws-ids i)
+                 {:from-queue   @(queues i)
                   :to-queue     @(queues (inc i))
                   :process-time @(pt/process-times i)
                   :current-time @(current-times i)

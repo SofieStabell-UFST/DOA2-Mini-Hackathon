@@ -1,29 +1,30 @@
-(ns workstation)
+(ns workstation
+  (:require [treetrunkgenerator :as t]))
 
 (defonce QUEUE_MAX_COUNT 12)
 
-(defn pull [{:keys [from-queue] :as state}]
+(defn pull [sim-time ws-id {:keys [from-queue] :as state}]
   (if (seq from-queue)
     (-> state
-        (assoc :current-log (last from-queue))
+        (assoc :current-log (t/stample-start-time (last from-queue) ws-id sim-time))
         (assoc :current-time 1)
         (update :from-queue (fn [v] (subvec v 0 (dec (count v))))))
     state))
 
-(defn push [{:keys [to-queue current-log] :as state}]
+(defn push [sim-time ws-id {:keys [to-queue current-log] :as state}]
   (if (< (count to-queue) QUEUE_MAX_COUNT)
     (-> state
         (assoc :current-log nil)
         (assoc :current-time 0)
-        (update :to-queue conj current-log))
+        (update :to-queue conj (t/stample-end-time current-log ws-id sim-time)))
     state))
 
-(defn run [{:keys [process-time from-queue to-queue current-time current-log] :as state}]
+(defn run [sim-time ws-id {:keys [process-time from-queue to-queue current-time current-log] :as state}]
   (if (and current-log (< current-time process-time))
     (update state :current-time inc)
     (if current-log
-      (let [{:keys [current-log] :as state} (push state)]
+      (let [{:keys [current-log] :as state} (push sim-time ws-id state)]
         (if (not current-log)
-          (pull state)
+          (pull sim-time ws-id state)
           state))
-      (pull state))))
+      (pull sim-time ws-id state))))
