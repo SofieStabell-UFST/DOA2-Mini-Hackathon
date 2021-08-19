@@ -41,6 +41,15 @@
 (def lead-time-4 (r/atom "-"))
 (def lead-time-5 (r/atom "-"))
 
+(defn set-timer []
+      (let [date (js/Date. 0)]
+           (fn []
+               (.setSeconds date @sim/sim-time)
+               (-> date
+                   (.toISOString)
+                   (.substr 14 5)))
+           ))
+
 (defn mini-app []
       [:div.container
        [:div
@@ -112,7 +121,7 @@
         ;;Start and Pause button
         [sim/pause-btn]
         [:div.button.reset-button @reset-button]
-        [sim/time-display]
+        [:div.timer [set-timer]]
         ]
        ])
 
