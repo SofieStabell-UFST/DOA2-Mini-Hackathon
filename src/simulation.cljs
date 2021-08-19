@@ -1,7 +1,7 @@
 (ns simulation
   (:require [reagent.core :as r]
             [skovhugger :refer [tree-felling]]
-            [processtime :as pt]))
+            [processtime :as pt]
             [workstation :as w]))
 
 (defonce paused? (r/atom true))
@@ -11,9 +11,8 @@
 (reset! (queues 0) [1 2 3 4 5 6 7 8 9 10])
 (defonce current-times (vec (for [_ (range 4)] (r/atom 0))))
 (defonce current-logs (vec (for [_ (range 4)] (r/atom nil))))
-(defonce process-times (vec (for [_ (range 5)] (r/atom 2))))
-(reset! (process-times 1) 4)
-(reset! (process-times 2) 6)
+(reset! (pt/process-times 1) 4)
+(reset! (pt/process-times 2) 6)
 (defonce readonly (r/atom false))
 
 (defonce total-process-time (r/atom 0))
@@ -38,7 +37,7 @@
 
 (defn run []
   (swap! pt/process-time-skovhugger dec)
-  (tree-felling (< (count (first queues)) 12)
+  (tree-felling (< (count @(first queues)) 12)
                 pt/process-time-skovhugger
                 (first queues)
                 @sim-time
@@ -47,7 +46,7 @@
     (let [{:keys [from-queue to-queue current-time current-log]}
           (w/run {:from-queue   @(queues i)
                   :to-queue     @(queues (inc i))
-                  :process-time @(process-times i)
+                  :process-time @(pt/process-times i)
                   :current-time @(current-times i)
                   :current-log  @(current-logs i)})]
       (reset! (queues i) from-queue)
