@@ -1,26 +1,28 @@
 (ns simulation
   (:require [reagent.core :as r]
             [workstation :as w]
-            [skovhugger :refer [create-tree-trunk]]
+            [skovhugger :refer [tree-felling]]
             [processtime :as pt]))
 
 (defonce paused? (r/atom true))
 (defonce sim-time (r/atom 0))
 (defonce interval (r/atom nil))
 
-(defonce queue1 (r/atom [1 2 3 4 5]))
+(defonce queue1 (r/atom []))
 (defonce current-time1 (r/atom 0))
 (defonce current-log1 (r/atom nil))
 (defonce queue2 (r/atom []))
-(defonce skovhugger-process-time (r/atom 2))
 (defonce readonly (r/atom false))
 
 
 (defn run []
-  ;; run skovhugger - push to queue1
-  (println (str "skovhugger-process-time: " @skovhugger-process-time))
-  (swap! skovhugger-process-time dec)
-  (create-tree-trunk (empty? @queue1) @skovhugger-process-time queue1)
+  (swap! pt/process-time-skovhugger dec)
+  (tree-felling (< (count @queue1) 12)
+                pt/process-time-skovhugger
+                queue1
+                @sim-time
+                pt/process-time-skovhugger-original)
+
       (let [{:keys [from-queue to-queue current-time current-log]}
             (w/run {:from-queue   @queue1
                     :to-queue     @queue2

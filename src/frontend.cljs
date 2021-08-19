@@ -50,7 +50,11 @@
         [:div.output "Output"]
         [:div.skov-output @skov-output " stk"]
         [:div.skov-process "Process"]
-        [:div [:input.skov-process-input {:type "number" :placeholder @skov-process :max "2" :size "1"}] [:div.label-skov-process "sek"]]
+        [:div [:input.skov-process-input {:type "number"
+                                          :placeholder @skov-process :max "2" :size "1"
+                                          :on-change #(pt/update-skovhugger-process-time (-> % .-target .-value))
+                                          }] [:div.label-skov-process "sek"]
+         ]
 
         [:div.total "Total"]
         [:div.process-time-header "Process time"]
