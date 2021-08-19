@@ -7,11 +7,13 @@
 (defonce paused? (r/atom true))
 (defonce sim-time (r/atom 0))
 (defonce interval (r/atom nil))
+
 (defonce queues (vec (for [_ (range 5)] (r/atom []))))
 (defonce current-times (vec (for [_ (range 4)] (r/atom 0))))
 (defonce current-logs (vec (for [_ (range 4)] (r/atom nil))))
-(reset! (pt/process-times 1) 4)
-(reset! (pt/process-times 2) 6)
+(defonce process-times (vec (for [_ (range 5)] (r/atom 2))))
+(reset! (process-times 1) 4)
+(reset! (process-times 2) 6)
 (defonce readonly (r/atom false))
 
 (defonce total-process-time (r/atom 0))
