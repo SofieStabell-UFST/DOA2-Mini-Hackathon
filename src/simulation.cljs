@@ -4,7 +4,7 @@
             [processtime :as pt]))
 
 (defonce paused? (r/atom true))
-(defonce sim-time (r/atom 10))
+(defonce sim-time (r/atom 0))
 (defonce interval (r/atom nil))
 
 (defonce queue1 (r/atom [1 2 3 4 5]))
