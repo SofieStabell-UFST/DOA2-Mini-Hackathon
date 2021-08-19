@@ -3,28 +3,26 @@
   )
 
 ;; TODO replace with amal stuff
-(defn cut-tree [a] (str "cutted tree: " a))
+(defn cut-tree [] (str "cutted tree: "))
 
 (defn create-tree-trunk [ws1-free skovhugger-process-time queue1]
-  (if ws1-free (let [tree
-                     ;; "GIVET at systemet kører NÅR den første workstations kø er IKKE er fuld  SÅ skal skovhuggeren fælde et træ. det tager den tid(processtid) som er defineret af brugeren."
-                     ;; TODO call amal instead
-                     (cut-tree skovhugger-process-time)
+  (println (str "queue1 is empty?: " ws1-free))
+  (println (str "skov hugger process time in skovhugger: " skovhugger-process-time))
+  ;; (println (str "queue1 size: " (size queue1)))
+  (if ws1-free (let [tree (cut-tree)
 
+                     bar (println "a")
+                     foo (if (< skovhugger-process-time 0)
+                       (println (str "skovhugger-process-time is " skovhugger-process-time ". So put tree in the water")))
 
-                     ; TODO GIVET at systemet kører, NÅR skovhuggeren fælder et træ, SÅ skal træstammen have tilknyttet relevant metadata i form af et timestamp for fældning, samt et unikt ID, så træstammen kan behandles og spores gennem flowet.
-                     ;
-                     tree-uuid (random-uuid)
-                     tree-cutted-time (js/Date.)
-
-
-                     ; TODO GIVET at systemet kører og skovhuggeren har fældet et træ, NÅR træstammen har fået tilknyttet relevant metadata, SÅ skal træstammen indsættes i køen til den første workstation.
-                     foo (println "queue1")
-                     bar (println @queue1)
                      ]
+                     bar (println "b")
 
+                     ;; TODO add tree to queue1 if queue1 is empty
+                     ;; foo (println "queue1")
+                     ;; bar (println @queue1)
 
-                 (println "tree: " tree)
-                 (println "tree uuid " tree-uuid)
-                 (println "tree cutted time: " tree-cutted-time)
                  )))
+
+                     ;; tree-uuid (random-uuid)
+                     ;; tree-cutted-time (js/Date.)
