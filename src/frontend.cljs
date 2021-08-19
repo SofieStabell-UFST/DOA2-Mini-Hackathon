@@ -25,32 +25,31 @@
         [:div.total-lead-time @sim/total-lead-time " sek"]
 
         [:div.process-time.process-time-1 "Process time"]
-        [:div [:input.input-process-time.input-process-time-1 {:type      "number" :id ":1" :placeholder @pt/process-time1 :max "2" :size "1" :read-only @sim/readonly
+        [:div [:input.input-process-time.input-process-time-1 {:type      "number" :id ":1" :placeholder @(sim/process-times 0) :max "2" :size "1" :read-only @sim/readonly
                                                                :on-change #(pt/update-process-time1 (-> % .-target .-value))}]
          [:div.label-ps.label-ps-1 "sek"]]
         [:div.process-time.process-time-2 "Process time"]
-        [:div [:input.input-process-time.input-process-time-2 {:type      "number" :id ":2" :placeholder @pt/process-time2 :max "2" :size "1" :read-only @sim/readonly
-                                                               :on-change #(pt/update-process-time1 (-> % .-target .-value))}]
+        [:div [:input.input-process-time.input-process-time-2 {:type      "number" :id ":2" :placeholder @(sim/process-times 1) :max "2" :size "1" :read-only @sim/readonly
+                                                               :on-change #(pt/update-process-time2 (-> % .-target .-value))}]
          [:div.label-ps.label-ps-2 "sek"]]
         [:div.process-time.process-time-3 "Process time"]
-        [:div [:input.input-process-time.input-process-time-3 {:type      "number" :id ":3" :placeholder @pt/process-time3 :max "2" :size "1" :read-only @sim/readonly
-                                                               :on-change #(pt/update-process-time1 (-> % .-target .-value))}]
+        [:div [:input.input-process-time.input-process-time-3 {:type      "number" :id ":3" :placeholder @(sim/process-times 2) :max "2" :size "1" :read-only @sim/readonly
+                                                               :on-change #(pt/update-process-time3 (-> % .-target .-value))}]
          [:div.label-ps.label-ps-3 "sek"]]
         [:div.process-time.process-time-4 "Process time"]
-        [:div [:input.input-process-time.input-process-time-4 {:type      "number" :id ":4" :placeholder @pt/process-time4 :max "2" :size "1" :read-only @sim/readonly
-                                                               :on-change #(pt/update-process-time1 (-> % .-target .-value))}]
+        [:div [:input.input-process-time.input-process-time-4 {:type      "number" :id ":4" :placeholder @(sim/process-times 3) :max "2" :size "1" :read-only @sim/readonly
+                                                               :on-change #(pt/update-process-time4 (-> % .-target .-value))}]
          [:div.label-ps.label-ps-4 "sek"]]
+
         [:div.process-time.process-time-5 "Process time"]
-        [:div [:input.input-process-time.input-process-time-5 {:type      "number" :id ":5" :placeholder @pt/process-time5 :max "2" :size "1" :read-only @sim/readonly
-                                                               :on-change #(pt/update-process-time1 (-> % .-target .-value))}]
+        [:div [:input.input-process-time.input-process-time-5 {:type      "number" :id ":5" :placeholder @(sim/process-times 4) :max "2" :size "1" :read-only @sim/readonly
+                                                               :on-change #(pt/update-process-time5 (-> % .-target .-value))}]
          [:div.label-ps.label-ps-5 "sek"]]
 
         ;Diplays queue item
-        [:div.ws-queue.ws1-queue (count @sim/queue1)]
-        [:div.ws-queue.ws2-queue (count @sim/queue2)]
-        [:div.ws-queue.ws3-queue @sim/ws3-queue]
-        [:div.ws-queue.ws4-queue @sim/ws4-queue]
-        [:div.ws-queue.ws5-queue @sim/ws5-queue]
+        (doall (for [i (range 5)]
+                    [:div.ws-queue {:key i :class (str "ws" (inc i) "-queue")}
+                     (count @(sim/queues i))]))
 
         ;; Item that are ready to be handled
         [:div.items.item-1 @sim/item-1]
@@ -83,7 +82,7 @@
        ])
 
 (defn ^:export run []
-      (rdom/render [mini-app]  (js/document.getElementById "app")))
+      (rdom/render [mini-app] (js/document.getElementById "app")))
 
 (defn ^:export reload []
       (.log js/console "reload...")
