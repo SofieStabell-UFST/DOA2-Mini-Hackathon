@@ -19,7 +19,7 @@
 (defonce total-lead-time (r/atom 0))
 (defonce skovhygge-input (r/atom 0))
 (defonce skov-output (r/atom 0))
-(defonce skov-process (r/atom 0))
+(defonce skov-process (r/atom 2))
 
 ;; items that are ready to be send forward
 (defonce item-1 (r/atom 0))

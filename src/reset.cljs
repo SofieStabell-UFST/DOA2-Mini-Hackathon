@@ -11,14 +11,11 @@
   (reset! sim/interval nil)
   (js/clearInterval @sim/interval)
 
-  (doseq [i (range 5)]
-    (reset! (sim/process-times i) 10))
-
-  (reset! sim/total-process-time 0)
-  (reset! sim/total-lead-time 0)
-  (reset! sim/skovhygge-input 0)
-  (reset! sim/skov-output 0)
-  (reset! sim/skov-process 0)
+      (reset! sim/total-process-time 0)
+      (reset! sim/total-lead-time 0)
+      (reset! sim/skovhygge-input 0)
+      (reset! sim/skov-output 0)
+      (reset! sim/skov-process 0)
 
   (doseq [i (range 5)]
     (reset! (sim/queues i) []))
