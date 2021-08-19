@@ -14,6 +14,47 @@
 (defonce readonly (r/atom false))
 
 
+(defonce total-process-time (r/atom 0))
+(defonce total-lead-time (r/atom 0))
+(defonce skovhygge-input (r/atom 0))
+(defonce skov-output (r/atom 0))
+(defonce skov-process (r/atom 0))
+(defonce ps1-input (r/atom 0))
+(defonce ps2-input (r/atom 0))
+(defonce ps3-input (r/atom 0))
+(defonce ps4-input (r/atom 0))
+(defonce ps5-input (r/atom 0))
+
+;; items in queue
+(defonce queue-1 (r/atom 0))
+(defonce queue-2 (r/atom 0))
+(defonce queue-3 (r/atom 0))
+(defonce queue-4 (r/atom 0))
+(defonce queue-5 (r/atom 0))
+
+;;Work station queue items
+
+(defonce ws3-queue (r/atom 0))
+(defonce ws4-queue (r/atom 0))
+(defonce ws5-queue (r/atom 0))
+
+;; items that are ready to be send forward
+(defonce item-1 (r/atom 0))
+(defonce item-2 (r/atom 0))
+(defonce item-3 (r/atom 0))
+(defonce item-4 (r/atom 0))
+(defonce item-5 (r/atom 0))
+;(defonce start-button (r/atom "Start"))
+(defonce timer (r/atom "00:00"))
+;(defonce reset-button (r/atom "Ryd"))
+
+;;Lead time
+(defonce lead-time-1 (r/atom "-"))
+(defonce lead-time-2 (r/atom "-"))
+(defonce lead-time-3 (r/atom "-"))
+(defonce lead-time-4 (r/atom "-"))
+(defonce lead-time-5 (r/atom "-"))
+
 (defn run []
       (let [{:keys [from-queue to-queue current-time current-log]}
             (w/run {:from-queue   @queue1
@@ -39,6 +80,7 @@
                                   (js/clearInterval @interval)
                                   (reset! readonly false)))
                               (swap! paused? not))}])
+
 
 (defn time-display []
       [:div.timer @sim-time])
