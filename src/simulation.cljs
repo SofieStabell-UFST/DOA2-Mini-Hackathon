@@ -56,19 +56,20 @@
       (reset! (current-logs i) current-log)))
   (swap! sim-time inc))
 
-(defn pause-btn []
-      [:input.button.start-button {:type     "button"
-               :value    (if @paused? "Start" "Pause")
-               :on-click #(do (if @paused?
-                                (do
-                                  (reset! interval (js/setInterval run 1000))
-                                  (reset! readonly true)
-                                  )
-                                (do
-                                  (js/clearInterval @interval)
-                                  (reset! readonly false)))
-                              (swap! paused? not))}])
+(defn start []
+  (reset! paused? false)
+  (reset! interval (js/setInterval run 1000)))
 
+(defn pause []
+  (reset! paused? true)
+  (js/clearInterval @interval))
+
+(defn pause-btn []
+  [:input.button.start-button {:type     "button"
+                               :value    (if @paused? "Start" "Pause")
+                               :on-click #(if @paused?
+                                            (start)
+                                            (pause))}])
 
 (defn time-display []
-      [:div.timer @sim-time])
+  [:div.timer @sim-time])
