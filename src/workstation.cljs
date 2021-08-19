@@ -18,12 +18,26 @@
         (update :to-queue conj current-log))
     state))
 
-(defn run [{:keys [process-time from-queue to-queue current-time current-log] :as state}]
+(defn push-to-sawmill [{:keys [to-queue current-log] :as state}]
+  (-> state
+      (#(do (println (str "my count: " (count to-queue))) %))
+      (assoc :current-log nil)
+      (assoc :current-time 0)
+      (update :to-queue conj current-log))
+  state)
+
+(defn run [{:keys [process-time from-queue to-queue current-time current-log current-workstation] :as state}]
   (if (and current-log (< current-time process-time))
     (update state :current-time inc)
     (if current-log
-      (let [{:keys [current-log] :as state} (push state)]
-        (if (not current-log)
-          (pull state)
-          state))
-      (pull state))))
+      (let [{:keys [current-log] :as state}
+            (if (= current-workstation 4) ; is sawmill
+              (do
+                (println (str "current-workstation " current-workstation))
+                (println (str "state is: " state))
+                (push-to-sawmill state))
+              (push state))]
+              (if (not current-log)
+                (pull state)
+                state))
+        (pull state))))

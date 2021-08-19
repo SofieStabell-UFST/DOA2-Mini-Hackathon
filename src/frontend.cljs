@@ -59,9 +59,13 @@
          [:div.label-ps.label-ps-5 "sek"]]
 
         ;Diplays queue item
-        (doall (for [i (range 5)]
-                    [:div.ws-queue {:key i :class (str "ws" (inc i) "-queue")}
-                     (count @(sim/queues i))]))
+        (doall (for [i (range 6)]
+                    (if (< i 6)
+                      [:div.ws-queue {:key i :class (str "ws" (inc i) "-queue")} (count @(sim/queues i))]
+                      (swap! sim/skov-output 789)
+
+                    )
+                    ))
 
         ;; Item that are ready to be handled
         [:div.items.item-1 @sim/item-1]
