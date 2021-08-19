@@ -16,7 +16,7 @@
       (reset! sim/total-lead-time 0)
       (reset! sim/skovhygge-input 0)
       (reset! sim/skov-output 0)
-      (reset! sim/skov-process 0)
+      (reset! pt/process-time-skovhugger-original 1)
 
       (doseq [i (range 5)]
              (reset! (sim/queues i) []))

@@ -25,7 +25,7 @@
                                                          "input-disabled"
                                                          "input-enabled"
                                                          )]
-                                         :placeholder @sim/skov-process :max "2" :size "1"
+                                         :placeholder @pt/process-time-skovhugger-original :max "2" :size "1"
                                          }]
         [:div.label-skov-process "sek"]]]
       )
