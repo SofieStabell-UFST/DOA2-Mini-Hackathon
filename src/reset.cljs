@@ -1,7 +1,9 @@
 (ns reset
   (:require
     [reagent.core :as r]
-    [simulation :as sim]))
+        ;[processtime :as pt]
+    [simulation :as sim]
+    ))
 
 ; clear-simulator will need to be refactored as we go as I predict changes, ie., new atoms and/or starting values.
 (defn clear-simulator []
@@ -37,13 +39,25 @@
       (reset! sim/item-4 0)
       (reset! sim/item-5 0)
 
-      (reset! sim/start-button "Start")
+      ;(reset! sim/start-button "Start")
       (reset! sim/timer "00:00")
-      (reset! sim/reset-button "Ryd")
+      ;(reset! sim/reset-button "Ryd")
 
       (reset! sim/lead-time-1 "-")
       (reset! sim/lead-time-2 "-")
       (reset! sim/lead-time-3 "-")
       (reset! sim/lead-time-4 "-")
       (reset! sim/lead-time-5 "-")
+
+      ;(reset! pt/process-time1 0)
+      ;(reset! pt/process-time2 0)
+      ;(reset! pt/process-time3 0)
+      ;(reset! pt/process-time4 0)
+      ;(reset! pt/process-time5 0)
       )
+
+(defn reset-btn []
+      [:input.button.reset-button {:type     "button"
+                                   :value    "Ryd"
+                                   :on-click  #(clear-simulator)
+                                   }])

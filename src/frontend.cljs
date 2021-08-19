@@ -2,7 +2,8 @@
   (:require
     [reagent.core :as r]
     [reagent.dom :as rdom]
-    [simulation :as sim]))
+    [simulation :as sim]
+    [reset]))
 
 
 (defn mini-app []
@@ -69,13 +70,13 @@
 
         ;;Start and Pause buttom
         [sim/pause-btn]
-        [:div.button.reset-button @sim/reset-button]
         [sim/time-display]
+        [reset/reset-btn]
         ]
        ])
 
 (defn ^:export run []
-      (rdom/render [mini-app] (js/document.getElementById "app")))
+      (rdom/render [mini-app]  (js/document.getElementById "app")))
 
 (defn ^:export reload []
       (.log js/console "reload...")

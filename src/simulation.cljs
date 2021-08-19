@@ -3,7 +3,7 @@
             [workstation :as w]))
 
 (defonce paused? (r/atom true))
-(defonce sim-time (r/atom 0))
+(defonce sim-time (r/atom 10))
 (defonce interval (r/atom nil))
 
 (defonce queue1 (r/atom [1 2 3 4 5]))
@@ -47,9 +47,9 @@
 (defonce item-3 (r/atom 0))
 (defonce item-4 (r/atom 0))
 (defonce item-5 (r/atom 0))
-(defonce start-button (r/atom "Start"))
+;(defonce start-button (r/atom "Start"))
 (defonce timer (r/atom "00:00"))
-(defonce reset-button (r/atom "Ryd"))
+;(defonce reset-button (r/atom "Ryd"))
 
 ;;Lead time
 (defonce lead-time-1 (r/atom "-"))
@@ -78,8 +78,9 @@
                                                 (reset! interval (js/setInterval run 1000))
                                                 (do
                                                   (js/clearInterval @interval)
-                                                  (process-time-inputs)))
+                                                  ))
                                               (swap! paused? not))}])
+
 
 (defn time-display []
   [:div.timer @sim-time])
