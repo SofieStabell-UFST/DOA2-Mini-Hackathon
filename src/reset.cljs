@@ -2,6 +2,7 @@
   (:require
     [reagent.core :as r]
     [simulation :as sim]
+    [processtime :as pt]
     ))
 
 ; clear-simulator will need to be refactored as we go as I predict changes, ie., new atoms and/or starting values.
@@ -12,7 +13,7 @@
   (js/clearInterval @sim/interval)
 
   (doseq [i (range 5)]
-    (reset! (sim/process-times i) 10))
+    (reset! (pt/process-times i) 10))
 
   (reset! sim/total-process-time 0)
   (reset! sim/total-lead-time 0)
