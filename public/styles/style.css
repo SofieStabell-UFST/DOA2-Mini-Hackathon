@@ -97,6 +97,7 @@ input:focus, textarea:focus, select:focus{
     font-size: 26px;
     line-height: 29px;
     text-align: left:
+    cursor: default;
 }
 
 .total-lead-time-header {
@@ -142,6 +143,7 @@ input:focus, textarea:focus, select:focus{
       font-size: 16px;
       line-height: 18px;
       text-align: center;
+      cursor: default;
 }
 
 .process-time-1 {
@@ -166,13 +168,13 @@ input:focus, textarea:focus, select:focus{
 
 .label-ps {
     position: absolute;
-
     height: 29px;
     width: 51px;
     color: #14143C;
     font-size: 26px;
     line-height: 29px;
     text-align: center;
+    cursor: default;
 }
 
 .label-ps-1 {
@@ -250,6 +252,7 @@ input:focus, textarea:focus, select:focus{
     font-size: 16px;
     line-height: 18px;
     text-align: center;
+    cursor: default;
     }
 
 .skov-process-input {
@@ -271,8 +274,8 @@ input:focus, textarea:focus, select:focus{
 
 .input-disabled {
     border: 0px solid;
+    cursor: default;
     }
-
 
 .label-skov-process {
       position: absolute;
@@ -285,6 +288,7 @@ input:focus, textarea:focus, select:focus{
       font-size: 26px;
       line-height: 29px;
       text-align: center;
+      cursor: default;
     }
 
 
@@ -303,6 +307,7 @@ input:focus, textarea:focus, select:focus{
       font-size: 60px;
       line-height: 67px;
       text-align: center;
+      cursor: default;
 }
 
 .ws1-queue {
@@ -434,6 +439,7 @@ input:focus, textarea:focus, select:focus{
       font-size: 16px;
       line-height: 18px;
       text-align: center;
+      cursor: default;
 }
 
 .lead-time-header-1 {
@@ -470,6 +476,7 @@ input:focus, textarea:focus, select:focus{
       font-size: 26px;
       line-height: 29px;
       text-align: center;
+      cursor: default;
 }
 
 .lead-time-1 {
@@ -511,4 +518,15 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+footer {
+  margin-top: 30px;
+  height: 73px;
+  width: 1440px;
+  opacity: 0.44;
+  color: #14143C;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
 }
