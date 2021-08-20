@@ -103,9 +103,8 @@
         (doall (for [i (range 5)]
                     [:div.ws-queue {:key i :class (str "ws" (inc i) "-queue")}
                      [:span {:class (cond
-                                      (== (count @(sim/queues i)) 12) "full"
-                                      (== (count @(sim/queues i)) 10) "warning"
-                                      (== (count @(sim/queues i)) 11) "warning"
+                                      (= (count @(sim/queues i)) 12) "full"
+                                      (or (= (count @(sim/queues i)) 10) (= (count @(sim/queues i)) 11)) "warning"
                                       (< (count @(sim/queues i)) 10) "vacant"
                                       )
                              } (count @(sim/queues i))]]))
@@ -137,8 +136,10 @@
         [sim/pause-btn]
         [:div.timer [set-timer]]
         [reset/reset-btn]
-        ]
-       ])
+        [:footer [:div "Bæverdæmningerne er udviklet i forbindelse med DevOps Akademiets uddannelses forløb."]
+         [:div "Ide og kravstilling af: Martin Baadsgaard & Sofie Jøhnk Stabell"]
+         [:div "Illustartioner af: Sofie Jøhnk Stabell"]
+         [:div "Udvikling af: Amal Qasim, Mathias Hedemann Hansen, Rohita Khatiwada, Shane Daniel Rich & Tue Thulesen Dahl"]]]])
 
 (defn ^:export run []
       (rdom/render [mini-app] (js/document.getElementById "app")))
