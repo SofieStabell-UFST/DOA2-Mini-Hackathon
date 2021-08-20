@@ -39,7 +39,7 @@
        [:div.process-time.process-time-1 "Process time"]
        [:div [:input.input-process-time.input-process-time-1
               {:type        "number" :id ":1"
-               :placeholder @(sim/process-times 0) :max "2" :size "1"
+               :placeholder @(pt/process-times 0) :max "2" :size "1"
                :class       [(if (not @sim/paused?)
                                "input-disabled"
                                "input-enabled"
@@ -50,7 +50,7 @@
        [:div.process-time.process-time-2 "Process time"]
        [:div [:input.input-process-time.input-process-time-2
               {:type        "number" :id ":2"
-               :placeholder @(sim/process-times 1) :max "2" :size "1"
+               :placeholder @(pt/process-times 1) :max "2" :size "1"
                :class       [(if (not @sim/paused?)
                                "input-disabled"
                                "input-enabled"
@@ -61,7 +61,7 @@
        [:div.process-time.process-time-3 "Process time"]
        [:div [:input.input-process-time.input-process-time-3
               {:type        "number" :id ":3"
-               :placeholder @(sim/process-times 2) :max "2" :size "1"
+               :placeholder @(pt/process-times 2) :max "2" :size "1"
                :class       [(if (not @sim/paused?)
                                "input-disabled"
                                "input-enabled"
@@ -72,7 +72,7 @@
        [:div.process-time.process-time-4 "Process time"]
        [:div [:input.input-process-time.input-process-time-4
               {:type        "number" :id ":4"
-               :placeholder @(sim/process-times 3) :max "2" :size "1"
+               :placeholder @(pt/process-times 3) :max "2" :size "1"
                :class       [(if (not @sim/paused?)
                                "input-disabled"
                                "input-enabled"
