@@ -47,6 +47,10 @@ img {
     text-align: right;
 }
 
+input:focus, textarea:focus, select:focus{
+        outline: none;
+    }
+
 .output {
   position: absolute;
   top: 150px;
@@ -239,9 +243,8 @@ img {
 .skov-process{
     position: absolute;
     top: 100px;
-    left: 225px;
+    left: 280px;
     height: 18px;
-    width: 110px;
     color: #14143C;
     font-family: Arial;
     font-size: 16px;
@@ -261,6 +264,15 @@ img {
     line-height: 29px;
     text-align: right;
     }
+
+.input-enabled {
+    border: 1px solid black;
+  }
+
+.input-disabled {
+    border: 0px solid;
+    }
+
 
 .label-skov-process {
       position: absolute;
@@ -379,9 +391,23 @@ img {
     width: 148px;
 }
 
+.full{
+    color: red;
+}
+
+.warning {
+    color: orange;
+}
+
+.vacant {
+    color: green;
+}
+
 .reset-button {
-    top: 780px;
+    top: 750px;
     left: 859px;
+    height: 87px;
+    width: 148px;
 }
 
 .timer {
