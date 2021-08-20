@@ -117,7 +117,7 @@
         [:div.items.item-2 (if (= @(sim/current-logs 1) nil) 0 1)]
         [:div.items.item-3 (if (= @(sim/current-logs 2) nil) 0 1)]
         [:div.items.item-4 (if (= @(sim/current-logs 3) nil) 0 1)]
-        ;;[:div.items.item-5 (if (= @(sim/current-logs 4) nil) 0 1)]
+        [:div.items.item-5 (if (= @(sim/current-logs 4) nil) 0 1)]
 
         ;;lead time
         [:div.lead-time-header.lead-time-header-1 "Lead time"]
