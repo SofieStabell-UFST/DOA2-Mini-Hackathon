@@ -4,7 +4,8 @@
     [reagent.dom :as rdom]
     [simulation :as sim]
     [reset]
-    [processtime :as pt]))
+    [processtime :as pt]
+    [skovhugger]))
 
 (defn set-timer []
       (let [date (js/Date. 0)]
@@ -26,6 +27,7 @@
                                                          "input-enabled"
                                                          )]
                                          :placeholder @pt/process-time-skovhugger-original :max "2" :size "1"
+                                         :on-change #(pt/update-skovhugger-process-time (-> % .-target .-value))
                                          }]
         [:div.label-skov-process "sek"]]]
       )
@@ -89,7 +91,7 @@
        [:div
         [:img {:src "/images/baeverdaemningerne.png" :alt "descriptive text"}]
         [:div.input "Input"]
-        [:div.skovhygge-input @sim/skovhygge-input " stk"]
+        [:div.skovhygge-input @skovhugger/count-skovhuggers-input-trees" stk"]
         [:div.output "Output"]
         [:div.skov-output @sim/skov-output " stk"]
         [set-process-time-for-skov-hygger]
@@ -114,7 +116,7 @@
         [:div.items.item-2 (if (= @(sim/current-logs 1) nil) 0 1)]
         [:div.items.item-3 (if (= @(sim/current-logs 2) nil) 0 1)]
         [:div.items.item-4 (if (= @(sim/current-logs 3) nil) 0 1)]
-        ;;[:div.items.item-5 (if (= @(sim/current-logs 4) nil) 0 1)]
+        [:div.items.item-5 (if (= @(sim/current-logs 4) nil) 0 1)]
 
         ;;lead time
         [:div.lead-time-header.lead-time-header-1 "Lead time"]
