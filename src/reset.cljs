@@ -18,6 +18,8 @@
   (doseq [i (range 4)]
     (reset! (sim/current-logs i) nil))
 
+  (reset! skovhugger/count-skovhuggers-input-trees 0)
+
   (reset! sim/lead-time-1 "-")
   (reset! sim/lead-time-2 "-")
   (reset! sim/lead-time-3 "-")
