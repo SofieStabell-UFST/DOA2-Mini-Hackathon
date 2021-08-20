@@ -102,7 +102,13 @@
         ;Diplays queue item
         (doall (for [i (range 5)]
                     [:div.ws-queue {:key i :class (str "ws" (inc i) "-queue")}
-                     (count @(sim/queues i))]))
+                     [:span {:class (cond
+                                      (== (count @(sim/queues i)) 12) "full"
+                                      (== (count @(sim/queues i)) 10) "warning"
+                                      (== (count @(sim/queues i)) 11) "warning"
+                                      (< (count @(sim/queues i)) 10) "vacant"
+                                      )
+                             } (count @(sim/queues i))]]))
 
         ;; Item that are ready to be handled
         [:div.items.item-1 (if (= @(sim/current-logs 0) nil) 0 1)]
