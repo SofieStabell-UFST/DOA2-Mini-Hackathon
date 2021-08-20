@@ -18,7 +18,7 @@
     (-> state
         (assoc :current-log nil)
         (assoc :current-time 0)
-        (update :to-queue conj current-log))
+        (update :to-queue (fn [v] (vec (cons current-log v)))))
     state))
 
 (defn push-to-sawmill [sim-time ws-id {:keys [to-queue current-log] :as state}]

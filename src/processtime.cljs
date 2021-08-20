@@ -1,7 +1,7 @@
 (ns processtime
   (:require [reagent.core :as r]))
 
-(defonce process-times (vec (for [_ (range 5)] (r/atom 2))))
+(defonce process-times (vec (for [_ (range 5)] (r/atom 1))))
 
 (defn update-process-time1 [new-process-time]
       (reset! (process-times 0) new-process-time))
