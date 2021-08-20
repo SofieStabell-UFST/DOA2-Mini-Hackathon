@@ -19,8 +19,8 @@
         (update :to-queue conj (t/stample-end-time current-log ws-id sim-time)))
     state))
 
-(defn push-to-sawmill [sim-time {:keys [to-queue current-log] :as state}]
-  (if (< (count to-queue) 100000000)
+(defn push-to-sawmill [sim-time ws-id {:keys [to-queue current-log] :as state}]
+  (if (< (count to-queue) 10000000)
     (-> state
         (assoc :current-log nil)
         (assoc :current-time 0)
