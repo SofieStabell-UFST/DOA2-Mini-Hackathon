@@ -1,7 +1,8 @@
 (ns reset
   (:require
     [simulation :as sim]
-    [processtime :as pt]))
+    [processtime :as pt]
+    [workstation :as w]))
 
 (defn clear-simulator []
   (sim/pause)
@@ -20,11 +21,8 @@
 
   (reset! skovhugger/count-skovhuggers-input-trees 0)
 
-  (reset! sim/lead-time-1 "-")
-  (reset! sim/lead-time-2 "-")
-  (reset! sim/lead-time-3 "-")
-  (reset! sim/lead-time-4 "-")
-  (reset! sim/lead-time-5 "-"))
+  (doseq [i (range 5)]
+    (reset! (w/lead-times i) nil)))
 
 (defn reset-btn []
   [:input.button.reset-button {:type     "button"

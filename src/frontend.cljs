@@ -5,86 +5,87 @@
     [simulation :as sim]
     [reset]
     [processtime :as pt]
-    [skovhugger]))
+    [skovhugger]
+    [workstation :as w]))
 
 (defn set-timer []
-      (let [date (js/Date. 0)]
-           (fn []
-               (.setMinutes date 0)
-               (.setSeconds date @sim/sim-time)
-               (-> date
-                   (.toISOString)
-                   (.substr 14 5)))
+  (let [date (js/Date. 0)]
+    (fn []
+      (.setMinutes date 0)
+      (.setSeconds date @sim/sim-time)
+      (-> date
+          (.toISOString)
+          (.substr 14 5)))
 
-           ))
+    ))
 
 (defn set-process-time-for-skov-hygger []
-      [:div
-       [:div.skov-process "Process time"]
-       [:div [:input.skov-process-input {:type        "number"
-                                         :class       [(if (not @sim/paused?)
-                                                         "input-disabled"
-                                                         "input-enabled"
-                                                         )]
-                                         :placeholder @pt/process-time-skovhugger-original :max "2" :size "1"
-                                         :on-change #(pt/update-skovhugger-process-time (-> % .-target .-value))
-                                         }]
-        [:div.label-skov-process "sek"]]]
-      )
+  [:div
+   [:div.skov-process "Process time"]
+   [:div [:input.skov-process-input {:type        "number"
+                                     :class       [(if (not @sim/paused?)
+                                                     "input-disabled"
+                                                     "input-enabled"
+                                                     )]
+                                     :placeholder @pt/process-time-skovhugger-original :max "2" :size "1"
+                                     :on-change   #(pt/update-skovhugger-process-time (-> % .-target .-value))
+                                     }]
+    [:div.label-skov-process "sek"]]]
+  )
 
 (defn create-process-time-for-ws []
-      [:div
-       [:div.process-time.process-time-1 "Process time"]
-       [:div [:input.input-process-time.input-process-time-1
-              {:type        "number" :id ":1"
-               :placeholder @(sim/process-times 0) :max "2" :size "1"
-               :class       [(if (not @sim/paused?)
-                               "input-disabled"
-                               "input-enabled"
-                               )]
-               :on-change   #(pt/update-process-time1 (-> % .-target .-value))}]
-        [:div.label-ps.label-ps-1 "sek"]]
-       [:div.process-time.process-time-2 "Process time"]
-       [:div [:input.input-process-time.input-process-time-2
-              {:type        "number" :id ":2"
-               :placeholder @(sim/process-times 1) :max "2" :size "1"
-               :class       [(if (not @sim/paused?)
-                               "input-disabled"
-                               "input-enabled"
-                               )]
-               :on-change   #(pt/update-process-time2 (-> % .-target .-value))}]
-        [:div.label-ps.label-ps-2 "sek"]]
-       [:div.process-time.process-time-3 "Process time"]
-       [:div [:input.input-process-time.input-process-time-3
-              {:type        "number" :id ":3"
-               :placeholder @(sim/process-times 2) :max "2" :size "1"
-               :class       [(if (not @sim/paused?)
-                               "input-disabled"
-                               "input-enabled"
-                               )]
-               :on-change   #(pt/update-process-time3 (-> % .-target .-value))}]
-        [:div.label-ps.label-ps-3 "sek"]]
-       [:div.process-time.process-time-4 "Process time"]
-       [:div [:input.input-process-time.input-process-time-4
-              {:type        "number" :id ":4"
-               :placeholder @(sim/process-times 3) :max "2" :size "1"
-               :class       [(if (not @sim/paused?)
-                               "input-disabled"
-                               "input-enabled"
-                               )]
-               :on-change   #(pt/update-process-time4 (-> % .-target .-value))}]
-        [:div.label-ps.label-ps-4 "sek"]]
+  [:div
+   [:div.process-time.process-time-1 "Process time"]
+   [:div [:input.input-process-time.input-process-time-1
+          {:type        "number" :id ":1"
+           :placeholder @(sim/process-times 0) :max "2" :size "1"
+           :class       [(if (not @sim/paused?)
+                           "input-disabled"
+                           "input-enabled"
+                           )]
+           :on-change   #(pt/update-process-time1 (-> % .-target .-value))}]
+    [:div.label-ps.label-ps-1 "sek"]]
+   [:div.process-time.process-time-2 "Process time"]
+   [:div [:input.input-process-time.input-process-time-2
+          {:type        "number" :id ":2"
+           :placeholder @(sim/process-times 1) :max "2" :size "1"
+           :class       [(if (not @sim/paused?)
+                           "input-disabled"
+                           "input-enabled"
+                           )]
+           :on-change   #(pt/update-process-time2 (-> % .-target .-value))}]
+    [:div.label-ps.label-ps-2 "sek"]]
+   [:div.process-time.process-time-3 "Process time"]
+   [:div [:input.input-process-time.input-process-time-3
+          {:type        "number" :id ":3"
+           :placeholder @(sim/process-times 2) :max "2" :size "1"
+           :class       [(if (not @sim/paused?)
+                           "input-disabled"
+                           "input-enabled"
+                           )]
+           :on-change   #(pt/update-process-time3 (-> % .-target .-value))}]
+    [:div.label-ps.label-ps-3 "sek"]]
+   [:div.process-time.process-time-4 "Process time"]
+   [:div [:input.input-process-time.input-process-time-4
+          {:type        "number" :id ":4"
+           :placeholder @(sim/process-times 3) :max "2" :size "1"
+           :class       [(if (not @sim/paused?)
+                           "input-disabled"
+                           "input-enabled"
+                           )]
+           :on-change   #(pt/update-process-time4 (-> % .-target .-value))}]
+    [:div.label-ps.label-ps-4 "sek"]]
 
-       [:div.process-time.process-time-5 "Process time"]
-       [:div [:input.input-process-time.input-process-time-5
-              {:type        "number" :id ":5"
-               :placeholder @(pt/process-times 4) :max "2" :size "1"
-               :class       [(if (not @sim/paused?)
-                               "input-disabled"
-                               "input-enabled"
-                               )]
-               :on-change   #(pt/update-process-time5 (-> % .-target .-value))}]
-        [:div.label-ps.label-ps-5 "sek"]]])
+   [:div.process-time.process-time-5 "Process time"]
+   [:div [:input.input-process-time.input-process-time-5
+          {:type        "number" :id ":5"
+           :placeholder @(pt/process-times 4) :max "2" :size "1"
+           :class       [(if (not @sim/paused?)
+                           "input-disabled"
+                           "input-enabled"
+                           )]
+           :on-change   #(pt/update-process-time5 (-> % .-target .-value))}]
+    [:div.label-ps.label-ps-5 "sek"]]])
 
 (defn mini-app []
       [:div.container
@@ -111,28 +112,17 @@
                                       )
                              } (count @(sim/queues i))]]))
 
-        ;; Item that are ready to be handled
-        [:div.items.item-1 (if (= @(sim/current-logs 0) nil) 0 1)]
-        [:div.items.item-2 (if (= @(sim/current-logs 1) nil) 0 1)]
-        [:div.items.item-3 (if (= @(sim/current-logs 2) nil) 0 1)]
-        [:div.items.item-4 (if (= @(sim/current-logs 3) nil) 0 1)]
-        [:div.items.item-5 (if (= @(sim/current-logs 4) nil) 0 1)]
+    ;; Item that are ready to be handled
+    [:div.items.item-1 (if (= @(sim/current-logs 0) nil) 0 1)]
+    [:div.items.item-2 (if (= @(sim/current-logs 1) nil) 0 1)]
+    [:div.items.item-3 (if (= @(sim/current-logs 2) nil) 0 1)]
+    [:div.items.item-4 (if (= @(sim/current-logs 3) nil) 0 1)]
+    [:div.items.item-5 (if (= @(sim/current-logs 4) nil) 0 1)]
 
-        ;;lead time
-        [:div.lead-time-header.lead-time-header-1 "Lead time"]
-        [:div.lead-time.lead-time-1 @sim/lead-time-1 " sek"]
-
-        [:div.lead-time-header.lead-time-header-2 "Lead time"]
-        [:div.lead-time.lead-time-2 @sim/lead-time-2 " sek"]
-
-        [:div.lead-time-header.lead-time-header-3 "Lead time"]
-        [:div.lead-time.lead-time-3 @sim/lead-time-3 " sek"]
-
-        [:div.lead-time-header.lead-time-header-4 "Lead time"]
-        [:div.lead-time.lead-time-4 @sim/lead-time-4 " sek"]
-
-        [:div.lead-time-header.lead-time-header-5 "Lead time"]
-        [:div.lead-time.lead-time-5 @sim/lead-time-5 " sek"]
+    ;;lead time
+    (doall (for [i (range 5)]
+             (list [:div.lead-time-header {:key (str "lead-time-header-" (inc i)) :class (str "lead-time-header-" (inc i))} "Lead time"]
+                   [:div.lead-time {:key (str "leadtime-" (inc i)) :class (str "lead-time-" (inc i))} (or @(w/lead-times i) "-") " sek"])))
 
         ;;Start and Pause button
         [sim/pause-btn]
@@ -144,8 +134,8 @@
          [:div "Udvikling af: Amal Qasim, Mathias Hedemann Hansen, Rohita Khatiwada, Shane Daniel Rich & Tue Thulesen Dahl"]]]])
 
 (defn ^:export run []
-      (rdom/render [mini-app] (js/document.getElementById "app")))
+  (rdom/render [mini-app] (js/document.getElementById "app")))
 
 (defn ^:export reload []
-      (.log js/console "reload...")
-      (run))
+  (.log js/console "reload...")
+  (run))
