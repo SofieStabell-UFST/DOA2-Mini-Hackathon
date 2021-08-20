@@ -106,7 +106,11 @@
         [:div.process-time-header "Process time"]
         [:div.total-lead-time-header "Lead time"]
         [:div.total-process-time @sim/total-process-time " sek"]
-        [:div.total-lead-time @sim/total-lead-time " sek"]
+        [:div.total-lead-time (if-let [queue @(sim/queues 5)]
+                                (let [latest-log (first queue)]
+                                 (- (get latest-log :global-end-time 0)
+                                    (get latest-log :global-start-time 0)))
+                                "-") " sek"]
         [create-process-time-for-ws]
         ;Diplays queue item
         (doall (for [i (range 5)]
