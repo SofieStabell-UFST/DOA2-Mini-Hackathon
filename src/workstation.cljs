@@ -20,19 +20,18 @@
     state))
 
 (defn push-to-sawmill [sim-time ws-id {:keys [to-queue current-log] :as state}]
-  (if (< (count to-queue) 10000000)
     (-> state
         (assoc :current-log nil)
         (assoc :current-time 0)
         (update :to-queue conj (t/stample-global-end-time current-log sim-time)))
-    state))
+    )
 
 (defn run [sim-time ws-id {:keys [process-time current-time current-log ] :as state}]
   (if (and current-log (< current-time process-time))
     (update state :current-time inc)
     (if current-log
       (let [{:keys [current-log] :as state}
-            (if (= ws-id 4)
+            (if (= ws-id "sawmill")
               (push-to-sawmill sim-time ws-id state)
               (push sim-time ws-id state))]
         (if (not current-log)
