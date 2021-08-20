@@ -1,6 +1,8 @@
 (ns workstation
-  (:require [treetrunkgenerator :as t]))
+  (:require [treetrunkgenerator :as t]
+            [reagent.core :as r]))
 
+(defonce lead-times (vec (for [_ (range 5)] (r/atom nil))))
 (defonce QUEUE_MAX_COUNT 12)
 
 (defn pull [sim-time ws-id {:keys [from-queue] :as state}]
@@ -16,25 +18,29 @@
     (-> state
         (assoc :current-log nil)
         (assoc :current-time 0)
-        (update :to-queue conj (t/stample-end-time current-log ws-id sim-time)))
+        (update :to-queue conj current-log))
     state))
 
 (defn push-to-sawmill [sim-time ws-id {:keys [to-queue current-log] :as state}]
-    (-> state
-        (assoc :current-log nil)
-        (assoc :current-time 0)
-        (update :to-queue conj (t/stample-global-end-time current-log sim-time)))
-    )
+  (-> state
+      (assoc :current-log nil)
+      (assoc :current-time 0)
+      (update :to-queue conj (t/stample-global-end-time current-log sim-time)))
+  )
 
-(defn run [sim-time ws-id {:keys [process-time current-time current-log ] :as state}]
+(defn run [sim-time ws-id {:keys [process-time current-time current-log] :as state}]
   (if (and current-log (< current-time process-time))
     (update state :current-time inc)
-    (if current-log
-      (let [{:keys [current-log] :as state}
-            (if (= ws-id "sawmill")
-              (push-to-sawmill sim-time ws-id state)
-              (push sim-time ws-id state))]
-        (if (not current-log)
-          (pull sim-time ws-id state)
-          state))
-      (pull sim-time ws-id state))))
+    (let [state (update state :current-log #(t/stample-end-time % ws-id sim-time))]
+      (reset! (lead-times ws-id) (if (= ws-id 0)
+                                   (- sim-time (get current-log :global-start-time))
+                                   (- sim-time (get-in current-log [(dec ws-id) :end-time]))))
+      (if current-log
+        (let [{:keys [current-log] :as state}
+              (if (= ws-id 4)
+                (push-to-sawmill sim-time ws-id state)
+                (push sim-time ws-id state))]
+          (if (not current-log)
+            (pull sim-time ws-id state)
+            state))
+        (pull sim-time ws-id state)))))
