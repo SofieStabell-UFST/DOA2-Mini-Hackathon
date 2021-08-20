@@ -50,8 +50,7 @@
                   :to-queue     @(queues (inc i))
                   :process-time @(pt/process-times i)
                   :current-time @(current-times i)
-                  :current-log  @(current-logs i)
-                  :current-workstation i})]
+                  :current-log  @(current-logs i)})]
       (reset! (queues i) from-queue)
       (reset! (queues (inc i)) to-queue)
       (reset! (current-times i) current-time)

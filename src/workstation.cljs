@@ -27,12 +27,12 @@
         (update :to-queue conj (t/stample-global-end-time current-log sim-time)))
     state))
 
-(defn run [sim-time ws-id {:keys [process-time current-time current-log current-workstation] :as state}]
+(defn run [sim-time ws-id {:keys [process-time current-time current-log ] :as state}]
   (if (and current-log (< current-time process-time))
     (update state :current-time inc)
     (if current-log
       (let [{:keys [current-log] :as state}
-            (if (= current-workstation 4)
+            (if (= ws-id 4)
               (push-to-sawmill sim-time ws-id state)
               (push sim-time ws-id state))]
         (if (not current-log)

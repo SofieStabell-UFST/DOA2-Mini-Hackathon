@@ -100,7 +100,7 @@
         [:div.total-lead-time @sim/total-lead-time " sek"]
         [create-process-time-for-ws]
         ;Diplays queue item
-        (doall (for [i (range 6)]
+        (doall (for [i (range 5)]
                     [:div.ws-queue {:key i :class (str "ws" (inc i) "-queue")}
                      [:span {:class (cond
                                       (== (count @(sim/queues i)) 12) "full"
