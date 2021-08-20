@@ -34,7 +34,7 @@
 (defonce lead-time-4 (r/atom "-"))
 (defonce lead-time-5 (r/atom "-"))
 
-(defonce ws-ids ["ws1" "ws2" "ws3" "ws4" "ws5"])
+(defonce ws-ids ["ws1" "ws2" "ws3" "ws4" "sawmill"])
 
 (defn run []
   (swap! pt/process-time-skovhugger dec)
