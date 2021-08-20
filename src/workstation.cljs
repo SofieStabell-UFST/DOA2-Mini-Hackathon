@@ -31,16 +31,16 @@
 (defn run [sim-time ws-id {:keys [process-time current-time current-log] :as state}]
   (if (and current-log (< current-time process-time))
     (update state :current-time inc)
-    (let [state (update state :current-log #(t/stample-end-time % ws-id sim-time))]
-      (reset! (lead-times ws-id) (if (= ws-id 0)
-                                   (- sim-time (get current-log :global-start-time))
-                                   (- sim-time (get-in current-log [(dec ws-id) :end-time]))))
-      (if current-log
-        (let [{:keys [current-log] :as state}
-              (if (= ws-id 4)
-                (push-to-sawmill sim-time ws-id state)
-                (push sim-time ws-id state))]
-          (if (not current-log)
-            (pull sim-time ws-id state)
-            state))
-        (pull sim-time ws-id state)))))
+    (if current-log
+      (do (reset! (lead-times ws-id) (if (= ws-id 0)
+                                       (- sim-time (get current-log :global-start-time))
+                                       (- sim-time (get-in current-log [(dec ws-id) :end-time]))))
+          (let [state (update state :current-log #(t/stample-end-time % ws-id sim-time))
+                {:keys [current-log] :as state}
+                (if (= ws-id 4)
+                  (push-to-sawmill sim-time ws-id state)
+                  (push sim-time ws-id state))]
+            (if (not current-log)
+              (pull sim-time ws-id state)
+              state)))
+      (pull sim-time ws-id state))))
