@@ -100,7 +100,7 @@
         [:div.input "Input"]
         [:div.skovhygge-input @skovhugger/count-skovhuggers-input-trees" stk"]
         [:div.output "Output"]
-        [:div.skov-output @sim/skov-output " stk"]
+        [:div.skov-output (count @(sim/queues 5)) " stk"]
         [set-process-time-for-skov-hygger]
         [:div.total "Total"]
         [:div.process-time-header "Process time"]
