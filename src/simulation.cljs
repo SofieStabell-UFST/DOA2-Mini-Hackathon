@@ -1,48 +1,27 @@
 (ns simulation
   (:require [reagent.core :as r]
-            [skovhugger :refer [tree-felling]]
+            [reagent.ratom :refer [make-reaction]]
             [processtime :as pt]
-            [workstation :as w]))
+            [workstation :as w]
+            [environment :as env]
+            [queue :refer [BoundedQueue UnboundedQueue InfiniteLogStream]]))
 
 (defonce paused? (r/atom true))
-(defonce sim-time (r/atom 0))
 (defonce interval (r/atom nil))
-(defonce queues (vec (for [_ (range 6)] (r/atom []))))
-(defonce current-times (vec (for [_ (range 5)] (r/atom 0))))
-(defonce current-logs (vec (for [_ (range 5)] (r/atom nil))))
+
+(defonce queues (vec (for [_ (range 7)] (r/atom (BoundedQueue. 12 cljs.core.PersistentQueue.EMPTY)))))
+(reset! (queues 0) (InfiniteLogStream.))
+(reset! (queues 6) (UnboundedQueue. cljs.core.PersistentQueue.EMPTY))
+(defonce current-times (vec (for [_ (range 6)] (r/atom 0))))
+(defonce current-logs (vec (for [_ (range 6)] (r/atom nil))))
 (defonce readonly (r/atom false))
 
-(defonce total-process-time (r/atom 0))
-(defonce total-lead-time (r/atom 0))
-(defonce skovhygge-input (r/atom 0))
-(defonce skov-output (r/atom 0))
-
-;; items that are ready to be send forward
-(defonce item-1 (r/atom 0))
-(defonce item-2 (r/atom 0))
-(defonce item-3 (r/atom 0))
-(defonce item-4 (r/atom 0))
-(defonce item-5 (r/atom 0))
-
-;;Lead time
-(defonce lead-time-1 (r/atom "-"))
-(defonce lead-time-2 (r/atom "-"))
-(defonce lead-time-3 (r/atom "-"))
-(defonce lead-time-4 (r/atom "-"))
-(defonce lead-time-5 (r/atom "-"))
-
-(defonce ws-ids [0 1 2 3 4])
+(defonce ws-ids [0 1 2 3 4 5])
 
 (defn run []
-  (swap! pt/process-time-skovhugger dec)
-  (tree-felling (< (count @(first queues)) 12)
-                pt/process-time-skovhugger
-                (first queues)
-                @sim-time
-                pt/process-time-skovhugger-original)
-  (doseq [i (range 5)]
+  (doseq [i (range 6)]
     (let [{:keys [from-queue to-queue current-time current-log]}
-          (w/run @sim-time (ws-ids i)
+          (w/run (ws-ids i)
                  {:from-queue   @(queues i)
                   :to-queue     @(queues (inc i))
                   :process-time @(pt/process-times i)
@@ -52,7 +31,7 @@
       (reset! (queues (inc i)) to-queue)
       (reset! (current-times i) current-time)
       (reset! (current-logs i) current-log)))
-  (swap! sim-time inc))
+  (swap! env/sim-time inc))
 
 (defn start []
   (reset! paused? false)
@@ -68,6 +47,3 @@
                                :on-click #(if @paused?
                                             (start)
                                             (pause))}])
-
-(defn time-display []
-  [:div.timer @sim-time])

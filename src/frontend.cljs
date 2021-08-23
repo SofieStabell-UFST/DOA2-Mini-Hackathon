@@ -5,19 +5,17 @@
     [simulation :as sim]
     [reset]
     [processtime :as pt]
-    [skovhugger]
-    [workstation :as w]))
+    [workstation :as w]
+    [environment :as env]))
 
 (defn set-timer []
   (let [date (js/Date. 0)]
     (fn []
       (.setMinutes date 0)
-      (.setSeconds date @sim/sim-time)
+      (.setSeconds date @env/sim-time)
       (-> date
           (.toISOString)
-          (.substr 14 5)))
-
-    ))
+          (.substr 14 5)))))
 
 (defn set-process-time-for-skov-hygger []
       [:div
@@ -28,7 +26,7 @@
                                                          "input-enabled"
                                                          )]
                                          :read-only   (not @sim/paused?)
-                                         :placeholder @pt/process-time-skovhugger-original :max "2" :size "1"
+                                         :placeholder @(pt/process-times 0) :max "2" :size "1"
                                          :on-change #(pt/update-skovhugger-process-time (-> % .-target .-value))
                                          }]
         [:div.label-skov-process "sek"]]]
@@ -39,7 +37,7 @@
        [:div.process-time.process-time-1 "Process time"]
        [:div [:input.input-process-time.input-process-time-1
               {:type        "number" :id ":1"
-               :placeholder @(pt/process-times 0) :max "2" :size "1"
+               :placeholder @(pt/process-times 1) :max "2" :size "1"
                :class       [(if (not @sim/paused?)
                                "input-disabled"
                                "input-enabled"
@@ -50,7 +48,7 @@
        [:div.process-time.process-time-2 "Process time"]
        [:div [:input.input-process-time.input-process-time-2
               {:type        "number" :id ":2"
-               :placeholder @(pt/process-times 1) :max "2" :size "1"
+               :placeholder @(pt/process-times 2) :max "2" :size "1"
                :class       [(if (not @sim/paused?)
                                "input-disabled"
                                "input-enabled"
@@ -61,7 +59,7 @@
        [:div.process-time.process-time-3 "Process time"]
        [:div [:input.input-process-time.input-process-time-3
               {:type        "number" :id ":3"
-               :placeholder @(pt/process-times 2) :max "2" :size "1"
+               :placeholder @(pt/process-times 3) :max "2" :size "1"
                :class       [(if (not @sim/paused?)
                                "input-disabled"
                                "input-enabled"
@@ -72,7 +70,7 @@
        [:div.process-time.process-time-4 "Process time"]
        [:div [:input.input-process-time.input-process-time-4
               {:type        "number" :id ":4"
-               :placeholder @(pt/process-times 3) :max "2" :size "1"
+               :placeholder @(pt/process-times 4) :max "2" :size "1"
                :class       [(if (not @sim/paused?)
                                "input-disabled"
                                "input-enabled"
@@ -84,7 +82,7 @@
        [:div.process-time.process-time-5 "Process time"]
        [:div [:input.input-process-time.input-process-time-5
               {:type        "number" :id ":5"
-               :placeholder @(pt/process-times 4) :max "2" :size "1"
+               :placeholder @(pt/process-times 5) :max "2" :size "1"
                :class       [(if (not @sim/paused?)
                                "input-disabled"
                                "input-enabled"
@@ -98,25 +96,23 @@
        [:div
         [:img {:src "/images/baeverdaemningerne.png" :alt "descriptive text"}]
         [:div.input "Input"]
-        [:div.skovhygge-input @skovhugger/count-skovhuggers-input-trees" stk"]
+        [:div.skovhygge-input @env/input " stk"]
         [:div.output "Output"]
-        [:div.skov-output (count @(sim/queues 5)) " stk"]
+        [:div.skov-output (count @(sim/queues 6)) " stk"]
         [set-process-time-for-skov-hygger]
         [:div.total "Total"]
         [:div.process-time-header "Process time"]
         [:div.total-lead-time-header "Lead time"]
-        [:div.total-process-time @sim/total-process-time " sek"]
-        [:div.total-lead-time @sim/total-lead-time " sek"]
+        [:div.total-process-time (or @env/total-process-time "-") " sek"]
+        [:div.total-lead-time (or @env/total-lead-time "-") " sek"]
         [create-process-time-for-ws]
         ;Diplays queue item
         (doall (for [i (range 5)]
                     [:div.ws-queue {:key i :class (str "ws" (inc i) "-queue")}
                      [:span {:class (cond
-                                      (= (count @(sim/queues i)) 12) "full"
-                                      (or (= (count @(sim/queues i)) 10) (= (count @(sim/queues i)) 11)) "warning"
-                                      (< (count @(sim/queues i)) 10) "vacant"
-                                      )
-                             } (count @(sim/queues i))]]))
+                                      (= (count @(sim/queues (inc i))) 12) "full"
+                                      (or (= (count @(sim/queues (inc i))) 10) (= (count @(sim/queues (inc i))) 11)) "warning"
+                                      (< (count @(sim/queues (inc i))) 10) "vacant")} (count @(sim/queues (inc i)))]]))
 
     ;; Item that are ready to be handled
     [:div.items.item-1 (if (= @(sim/current-logs 0) nil) 0 1)]
@@ -128,7 +124,7 @@
     ;;lead time
     (doall (for [i (range 5)]
              (list [:div.lead-time-header {:key (str "lead-time-header-" (inc i)) :class (str "lead-time-header-" (inc i))} "Lead time"]
-                   [:div.lead-time {:key (str "leadtime-" (inc i)) :class (str "lead-time-" (inc i))} (or @(w/lead-times i) "-") " sek"])))
+                   [:div.lead-time {:key (str "leadtime-" (inc i)) :class (str "lead-time-" (inc i))} (or @(w/lead-times (inc i)) "-") " sek"])))
 
         ;;Start and Pause button
         [sim/pause-btn]
